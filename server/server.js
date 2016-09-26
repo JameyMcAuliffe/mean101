@@ -13,4 +13,8 @@ app.set('port', port)
 //express.static executes in context of where your node_modules dir is
 app.use(express.static('client'))
 
+app.get('/api/title', (req, res) => {
+	res.json({title: 'MEAN 101 from Node'})
+})
+
 app.listen(port, () => console.log(`Listening on port: ${port}`))

@@ -2,6 +2,12 @@
 
 angular
 	.module('mean101', [])
-	.controller('main', function($scope) {
-		$scope.title = 'Mean 101 from Angular'
+	.controller('main', function($scope, $http) {
+		//$scope.title = 'Mean 101 from Angular'
+		$http
+			.get('/api/title')
+			.then(({data: {title}}) => {
+				$scope.title = title
+			})
 	})
+
