@@ -2,6 +2,7 @@
 
 const express = require('express')
 const mongoose = require('mongoose')
+const { json } = require('body-parser')
 
 
 //initialize express into app
@@ -15,6 +16,7 @@ const PORT = process.env.PORT || 3000
 
 //express.static executes in context of where your node_modules dir is
 app.use(express.static('client'))
+app.use(json())
 
 app.get('/api/title', (req, res) => {
 	res.json({title: 'MEAN Chat'})
@@ -31,6 +33,14 @@ app.get('/api/messages', (req, res, err) => {
 		.then(messages => {
 			res.json({messages})
 		})
+		.catch(err)
+})
+
+app.post('/api/messages', (req, res, err) => {
+	const msg = req.body
+	Message
+		.create(msg)
+		.then(msg => res.json(msg))
 		.catch(err)
 })
 
